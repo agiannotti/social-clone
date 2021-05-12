@@ -9,6 +9,7 @@ const Login = (props) => {
         </a>
         <div>
           <Join>Join Now</Join>
+          <SignIn>Sign In</SignIn>
         </div>
       </Nav>
     </Container>
@@ -41,6 +42,23 @@ const Join = styled.a`
     background-color: #efefef;
     color: rgba(0, 0, 0, 0.9);
     text-decoration: none;
+  }
+`;
+
+const SignIn = styled.a`
+  box-shadow: inset 0 0 0 1px #f5d654;
+  color: #f5d654;
+  border-radius: 24px;
+  transition-duration: 167ms;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  padding: 10px 24px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0);
+  &:hover {
+    background-color: #f5d654;
+    color: black;
   }
 `;
 export default Login;
