@@ -1,18 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Login = (props) => {
   return (
     <Container>
       <Nav>
-        <a href="/">
-          <img src="../images/moon.png" alt="mo0n" />
+        <a href='/'>
+          <img src='../images/moon.png' alt='mo0n' />
         </a>
         <div>
           <Join>Join Now</Join>
           <SignIn>Sign In</SignIn>
         </div>
       </Nav>
-      <Section>Section</Section>
+      <Section>
+        <Hero>
+          <h1>Welcome to your community </h1>
+        </Hero>
+      </Section>
     </Container>
   );
 };
@@ -73,13 +77,32 @@ const Section = styled.section`
   padding: 60px 0;
   position: relative;
   flex-wrap: wrap;
-  width: 100%:
+  width: 100%;
   max-width: 1128px;
   align-items: center;
   margin: auto;
-  @media(max-width: 768px) {
+
+  @media (max-width: 768px) {
     margin: auto;
     min-height: 0px;
+  }
+`;
+
+const Hero = styled.div`
+  width: 100%;
+  h1 {
+    padding-bottom: 0;
+    width: 55%;
+    font-size: 56px;
+    color: #f5d654;
+    font-weight: 200;
+    line-height: 75px;
+    @media (max-width: 768px) {
+      text-align: center;
+      font-size: 20px;
+      width: 100%;
+      line-height: 2;
+    }
   }
 `;
 export default Login;
