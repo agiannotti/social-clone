@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Login = (props) => {
   return (
     <Container>
       <Nav>
-        <a href='/'>
-          <img src='../images/moon.png' alt='mo0n' />
+        <a href="/">
+          <img src="../images/moon.png" alt="mo0n" />
         </a>
         <div>
           <Join>Join Now</Join>
@@ -20,6 +20,7 @@ const Container = styled.div`
 `;
 const Nav = styled.div`
   max-width: 1200px;
+  color: white;
   margin: auto;
   padding: 12px 0 16px;
   display: flex;
@@ -30,11 +31,10 @@ const Nav = styled.div`
 `;
 
 const Join = styled.a`
-  color: black;
+  border: 1px solid gray;
   font-size: 16px;
   padding: 10px 12px;
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.6);
   margin-right: 12px;
   border-radius: 12px;
   &:hover {
