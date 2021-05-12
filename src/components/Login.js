@@ -12,6 +12,7 @@ const Login = (props) => {
           <SignIn>Sign In</SignIn>
         </div>
       </Nav>
+      <Section>Section</Section>
     </Container>
   );
 };
@@ -59,6 +60,26 @@ const SignIn = styled.a`
   &:hover {
     background-color: #f5d654;
     color: black;
+    opacity: 0.8;
+    text-decoration: none;
+  }
+`;
+const Section = styled.section`
+  display: flex;
+  min-height: 700px;
+  align-content: start;
+  padding-bottom: 138px;
+  padding-top: 40px;
+  padding: 60px 0;
+  position: relative;
+  flex-wrap: wrap;
+  width: 100%:
+  max-width: 1128px;
+  align-items: center;
+  margin: auto;
+  @media(max-width: 768px) {
+    margin: auto;
+    min-height: 0px;
   }
 `;
 export default Login;
