@@ -38,7 +38,7 @@ const Header = () => {
             <NavList>
               <a>
                 <img src={navJobs} alt='navJobs' />
-                <span>Meet Ups</span>
+                <span>Link Ups</span>
               </a>
             </NavList>
             <NavList>
