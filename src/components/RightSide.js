@@ -119,15 +119,4 @@ const BannerCard = styled(FollowCard)`
   }
 `;
 
-const CommonCard = styled.div`
-  text-align: center;
-  overflow: hidden;
-  margin-bottom: 8px;
-  background-color: #fff;
-  border-radius: 12px;
-  position: relative;
-  border: none;
-  box-shadow: inset 0 0 0 1px rgb(0, 0, 0, 0.6);
-`;
-
 export default RightSide;
