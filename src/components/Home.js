@@ -7,10 +7,10 @@ const Home = (props) => {
     <Container>
       <Section>
         <h5>
-          <a>Looking for ways to collaborate? -</a>
+          <a>Looking for new ways to collaborate? -</a>
           <p>
-            Find other artists to get in touch with in no time with Link Ups and
-            keep projects in motion.
+            Find other artists to get in touch with Link Ups and keep your
+            projects in motion.
           </p>
         </h5>
       </Section>
