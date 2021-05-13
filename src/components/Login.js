@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import logo from '../images/google-logo.png';
 
 const Login = (props) => {
   return (
@@ -15,7 +16,14 @@ const Login = (props) => {
       <Section>
         <Hero>
           <h1>Welcome to your community </h1>
+          {/* <img src="/images/login-hero.svg" alt="" /> */}
         </Hero>
+        <Form>
+          <Google>
+            <img src={logo} alt='google' />
+            Sign in with Google
+          </Google>
+        </Form>
       </Section>
     </Container>
   );
@@ -104,5 +112,54 @@ const Hero = styled.div`
       line-height: 2;
     }
   }
+
+  img {
+    /* z-index: -1; */
+    width: 700px;
+    height: 670px;
+    position: absolute;
+    bottom: -2px;
+    right: -150px;
+    @media (max-width: 768px) {
+      top: 50px;
+      width: initial;
+      position: initial;
+      height: initial;
+    }
+  }
 `;
+
+const Form = styled.div`
+  margin-top: 100px;
+  width: 408px;
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
+`;
+const Google = styled.button`
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  align-items: center;
+  height: 56px;
+  width: 100%;
+  border: 2px solid gray;
+  border-radius: 28px;
+  box-shadow: inset 0 0 0 1px rbg(0 0 0 / 60%),
+    inset 0 0 0 2px rbg(0 0 0 / 0%) inset 0 0 0 1px rbg(0 0 0 / 0%);
+  vertical-align: middle;
+  z-index: 0;
+  transition-duration: 167ms;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  &:hover {
+    background-color: rgba(207, 207, 207, 0.99);
+    color: rgba(0, 0, 0, 0.75);
+  }
+  img {
+    height: 24px;
+    padding: 4px;
+  }
+`;
+
 export default Login;
