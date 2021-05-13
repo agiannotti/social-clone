@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import logo from '../images/google-logo.png';
+import moon from '../images/moon.png';
 
 const Login = (props) => {
   return (
@@ -20,7 +21,7 @@ const Login = (props) => {
         </Hero>
         <Form>
           <Google>
-            <img src={logo} alt='google' />
+            <img src={moon} alt='google' />
             Sign in with Google
           </Google>
         </Form>
@@ -132,6 +133,9 @@ const Hero = styled.div`
 const Form = styled.div`
   margin-top: 100px;
   width: 408px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
   @media (max-width: 768px) {
     margin-top: 20px;
   }
