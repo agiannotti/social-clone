@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 import moon from '../images/moon.png';
+import searchIcon from '../images/search-icon.svg';
 
 const Header = () => {
   return (
     <Container>
       <Content>
         <Logo>
-          {' '}
           <a href='/home'>
             <img src={moon} style={{ height: 65 }} alt='home-moon' />
           </a>
         </Logo>
+        <Search>
+          <div>
+            <input type='text' placeholder='Search' />
+          </div>
+          <SearchIcon>
+            <img src={searchIcon} alt='searchIcon' />
+          </SearchIcon>
+        </Search>
       </Content>
     </Container>
   );
@@ -37,4 +45,43 @@ const Content = styled.div`
 const Logo = styled.span`
   margin-left: -10px;
 `;
+
+const Search = styled.div`
+  opacity: 1;
+  flex-grow: 1;
+  position: relative;
+  & > div {
+    max-width: 280px;
+    input {
+      border: none;
+      box-shadow: none;
+      background-color: lightgray;
+      color: rgba(0, 0, 0, 0.9);
+      width: 218px;
+      padding: 0 8px 0 40px;
+      line-height: 1.75;
+      font-weight: 500;
+      font-size: 14px;
+      height: 34px;
+      border-color: #dce6f1;
+      outline: none;
+      border-radius: 8px;
+      vertical-align: text-top;
+    }
+  }
+`;
+const SearchIcon = styled.div`
+  width: 40px;
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 2px;
+  border-radius: 0 2px 2px 0;
+  margin: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export default Header;
