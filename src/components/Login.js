@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { connect } from 'react-redux';
 import logo from '../images/google-logo.png';
 import moon from '../images/moon.png';
 
@@ -175,4 +175,10 @@ const Google = styled.button`
   }
 `;
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
