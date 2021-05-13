@@ -4,7 +4,12 @@ import AddAPhotoTwoToneIcon from '@material-ui/icons/AddAPhotoTwoTone';
 import AssignmentTwoToneIcon from '@material-ui/icons/AssignmentTwoTone';
 import EventAvailableTwoToneIcon from '@material-ui/icons/EventAvailableTwoTone';
 import user from '../images/user.svg';
-
+import sharedImg from '../images/background.jpg';
+import ThumbUpAltTwoTone from '@material-ui/icons/ThumbUpAlt';
+import SentimentVerySatisfiedTwoToneIcon from '@material-ui/icons/SentimentVerySatisfiedTwoTone';
+import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
+import SendIcon from '@material-ui/icons/Send';
+import LaunchIcon from '@material-ui/icons/Launch';
 const Main = (props) => {
   return (
     <Container>
@@ -55,6 +60,43 @@ const Main = (props) => {
             <button>...</button>
           </SharedActor>
           <Description>Desc</Description>
+          <SharedImg>
+            <a>
+              <img src={sharedImg} alt='' />
+            </a>
+          </SharedImg>
+          <SocialCounts>
+            <li>
+              <button>
+                <ThumbUpAltTwoTone style={{ color: '#424242' }} />
+                <SentimentVerySatisfiedTwoToneIcon
+                  style={{ color: '#424242' }}
+                />
+                <span>75</span>
+              </button>
+            </li>
+            <li>
+              <a>2 comments</a>
+            </li>
+          </SocialCounts>
+          <SocialActions>
+            <button>
+              <ThumbUpAltTwoTone />
+              <span>Like</span>
+            </button>
+            <button>
+              <CommentTwoToneIcon />
+              <span>Comment</span>
+            </button>
+            <button>
+              <LaunchIcon />
+              <span>Share</span>
+            </button>
+            <button>
+              <SendIcon />
+              <span>Send</span>
+            </button>
+          </SocialActions>
         </Article>
       </div>
     </Container>
@@ -133,7 +175,7 @@ const ShareBox = styled(CommonCard)`
 `;
 
 const Article = styled(CommonCard)`
-  padding: 0;
+  padding: 2px;
   margin: 0 0 8px;
   overflow: visible;
 `;
@@ -196,4 +238,64 @@ const SharedActor = styled.div`
   }
 `;
 
+const Description = styled.div`
+  padding: 0 16px;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  text-align: left;
+`;
+const SharedImg = styled.div`
+  margin-top: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background-color: #fff;
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const SocialCounts = styled.ul`
+  list-style: none;
+  line-height: 1.3;
+  display: flex;
+  align-items: flex-start;
+  overflow: auto;
+  margin: 0 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid gray;
+  li {
+    margin-right: 5px;
+    font-size: 12px;
+    button {
+      display: flex;
+    }
+  }
+`;
+
+const SocialActions = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+  min-height: 40px;
+  padding: 4px 8px;
+  button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    color: #424242;
+
+    @media (min-width: 768px) {
+      span {
+        margin-left: 8px;
+      }
+    }
+  }
+`;
 export default Main;
