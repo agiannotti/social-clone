@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import CloseIcon from '@material-ui/icons/Close';
 import user from '../images/user.svg';
+import InsertPhotoTwoToneIcon from '@material-ui/icons/InsertPhotoTwoTone';
+import VideoCallTwoToneIcon from '@material-ui/icons/VideoCallTwoTone';
+import AddCommentTwoToneIcon from '@material-ui/icons/AddCommentTwoTone';
 
 const PostModal = () => {
   return (
@@ -12,12 +15,30 @@ const PostModal = () => {
             <CloseIcon />
           </button>
         </Header>
-        <SharedContent>
+        <ShareContent>
           <UserInfo>
             <img src={user} alt='userLogo' />
             <span>Name</span>
           </UserInfo>
-        </SharedContent>
+        </ShareContent>
+        <ShareCreation>
+          <AttachAssets>
+            <AssetButton>
+              <InsertPhotoTwoToneIcon />
+            </AssetButton>
+            <AssetButton>
+              <VideoCallTwoToneIcon />
+            </AssetButton>
+          </AttachAssets>
+          <ShareComment>
+            <AssetButton>
+              <AddCommentTwoToneIcon />
+              hmmm
+            </AssetButton>
+          </ShareComment>
+
+          <PostButton>Post</PostButton>
+        </ShareCreation>
       </Content>
     </Container>
   );
@@ -71,7 +92,7 @@ const Header = styled.div`
   }
 `;
 
-const SharedContent = styled.div`
+const ShareContent = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -96,6 +117,47 @@ const UserInfo = styled.div`
     font-size: 16px;
     line-height: 1.5;
     margin-left: 5px;
+  }
+`;
+
+const ShareCreation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px 12px 16px;
+`;
+
+const AssetButton = styled.button`
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.5);
+`;
+const AttachAssets = styled.div`
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+  ${AssetButton} {
+    width: 40px;
+    height: 40px;
+  }
+`;
+const ShareComment = styled.div`
+  padding-left: 8px;
+  margin-right: auto;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  ${AssetButton} {
+    svg {
+      margin-right: 5px;
+      height: 35px;
+    }
+  }
+`;
+const PostButton = styled.button`
+  min-width: 60px;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0 16px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
