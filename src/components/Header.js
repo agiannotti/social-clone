@@ -19,7 +19,7 @@ const Header = () => {
             <img src={moon} style={{ height: 40 }} alt='home-moon' />
           </a>
         </Logo>
-        <Socials>Socials</Socials>
+        {/* <Socials>Socials</Socials> */}
 
         <Search>
           <div>
