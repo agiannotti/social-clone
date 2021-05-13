@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import logo from '../images/google-logo.png';
 import moon from '../images/moon.png';
 
@@ -9,6 +10,7 @@ const Login = (props) => {
         <a href='/'>
           <img src={moon} style={{ height: 45 }} alt='mo0n' />
         </a>
+        <Socials>Socials.</Socials>
         <div>
           <Join>Join Now</Join>
           <SignIn>Sign In</SignIn>
@@ -16,7 +18,7 @@ const Login = (props) => {
       </Nav>
       <Section>
         <Hero>
-          <h1>Welcome to your community </h1>
+          <h1>Welcome to your creative community. </h1>
           {/* <img src="/images/login-hero.svg" alt="" /> */}
         </Hero>
         <Form>
@@ -29,6 +31,10 @@ const Login = (props) => {
     </Container>
   );
 };
+const Socials = styled.h1`
+  padding: 8px;
+  margin-right: auto;
+`;
 
 const Container = styled.div`
   padding: 0px;
@@ -145,6 +151,9 @@ const Google = styled.button`
   justify-content: center;
   background-color: #fff;
   align-items: center;
+  /* temp  */
+  margin-top: 450px;
+  /* temp */
   height: 56px;
   width: 100%;
   border: 2px solid gray;

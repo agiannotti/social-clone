@@ -19,6 +19,8 @@ const Header = () => {
             <img src={moon} style={{ height: 40 }} alt='home-moon' />
           </a>
         </Logo>
+        <Socials>Socials</Socials>
+
         <Search>
           <div>
             <input type='text' placeholder='Search' />
@@ -83,6 +85,10 @@ const Header = () => {
     </Container>
   );
 };
+const Socials = styled.h1`
+  padding: 8px;
+  margin-right: auto;
+`;
 
 const Container = styled.div`
   background-color: #eee;
@@ -103,7 +109,7 @@ const Content = styled.div`
 `;
 
 const Logo = styled.span`
-  margin-left: -10px;
+  margin-left: -60px;
   padding-right: 12px;
   a {
     display: flex;
