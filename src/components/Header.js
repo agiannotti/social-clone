@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import moon from '../images/moon.png';
 import searchIcon from '../images/search-icon.svg';
+import navHome from '../images/nav-home.svg';
 
 const Header = () => {
   return (
@@ -8,7 +9,7 @@ const Header = () => {
       <Content>
         <Logo>
           <a href='/home'>
-            <img src={moon} style={{ height: 65 }} alt='home-moon' />
+            <img src={moon} style={{ height: 40 }} alt='home-moon' />
           </a>
         </Logo>
         <Search>
@@ -19,6 +20,15 @@ const Header = () => {
             <img src={searchIcon} alt='searchIcon' />
           </SearchIcon>
         </Search>
+        <Nav>
+          <NavListWrap>
+            <NavList>
+              <a>
+                <img src={navHome} alt='' />
+              </a>
+            </NavList>
+          </NavListWrap>
+        </Nav>
       </Content>
     </Container>
   );
@@ -44,6 +54,10 @@ const Content = styled.div`
 
 const Logo = styled.span`
   margin-left: -10px;
+  a {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const Search = styled.div`
@@ -83,5 +97,20 @@ const SearchIcon = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const Nav = styled.nav`
+  margin-left: auto;
+  display: block;
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: white;
+    width: 100%;
+  }
+`;
+
+const NavListWrap = styled.ul``;
+const NavList = styled.li``;
 
 export default Header;

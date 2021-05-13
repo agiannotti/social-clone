@@ -7,7 +7,7 @@ const Login = (props) => {
     <Container>
       <Nav>
         <a href='/'>
-          <img src='../images/moon.png' alt='mo0n' />
+          <img src={moon} style={{ height: 45 }} alt='mo0n' />
         </a>
         <div>
           <Join>Join Now</Join>
@@ -21,7 +21,7 @@ const Login = (props) => {
         </Hero>
         <Form>
           <Google>
-            <img src={moon} alt='google' />
+            <img src={logo} alt='google' />
             Sign in with Google
           </Google>
         </Form>
