@@ -35,6 +35,7 @@ const RightSide = (props) => {
           View all recommendations <img src={rightIcon} alt='rightIcon' />
         </Recommendation>
       </FollowCard>
+      {/* <BannerCard><img src= alt="" /></BannerCard> */}
     </Container>
   );
 };
@@ -103,6 +104,30 @@ const FeedList = styled.ul`
 `;
 const Avatar = styled.div`
   background-image: url() ();
+`;
+const Recommendation = styled.a`
+  color: #f5d654;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+`;
+
+const BannerCard = styled(FollowCard)`
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const CommonCard = styled.div`
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 8px;
+  background-color: #fff;
+  border-radius: 12px;
+  position: relative;
+  border: none;
+  box-shadow: inset 0 0 0 1px rgb(0, 0, 0, 0.6);
 `;
 
 export default RightSide;

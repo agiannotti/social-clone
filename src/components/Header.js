@@ -109,7 +109,7 @@ const Content = styled.div`
 `;
 
 const Logo = styled.span`
-  margin-left: -60px;
+  margin-left: -18px;
   padding-right: 12px;
   a {
     display: flex;
