@@ -10,6 +10,7 @@ import navWork from '../images/nav-work.svg';
 import user from '../images/user.svg';
 import downIcon from '../images/down-icon.svg';
 import { connect } from 'react-redux';
+import { signOutApi } from '../actions';
 
 const Header = (props) => {
   return (
@@ -75,7 +76,7 @@ const Header = (props) => {
                 </span>
               </a>
 
-              <SignOut>
+              <SignOut onClick={() => props.signOut()}>
                 <a>Sign Out</a>
               </SignOut>
             </User>
@@ -278,6 +279,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOutApi()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

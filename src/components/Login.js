@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { SignInApi } from '../actions/';
+import { signInApi } from '../actions/';
 import logo from '../images/google-logo.png';
 import { Redirect } from 'react-router';
 import moon from '../images/moon.png';
@@ -184,7 +184,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  signIn: () => dispatch(SignInApi()),
+  signIn: () => dispatch(signInApi()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
