@@ -9,8 +9,9 @@ import navNotifications from '../images/nav-notifications.svg';
 import navWork from '../images/nav-work.svg';
 import user from '../images/user.svg';
 import downIcon from '../images/down-icon.svg';
+import { connect } from 'react-redux';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <Container>
       <Content>
@@ -63,9 +64,15 @@ const Header = () => {
             </NavList>
             <User>
               <a>
-                <img src={user} alt='user' />
-                <span>Me</span>
-                <img src={downIcon} alt='userDown' />
+                {props.user && props.user.photoURL ? (
+                  <img src={props.user.photoURL} alt='gmailPhoto' />
+                ) : (
+                  <img src={user} alt='user' />
+                )}
+                <span>
+                  Me
+                  <img src={downIcon} alt='userDown' />
+                </span>
               </a>
 
               <SignOut>
@@ -75,8 +82,10 @@ const Header = () => {
             <Work>
               <a>
                 <img src={navWork} alt='work' />
-                <span>Work</span>
-                <img src={downIcon} alt='workDown' />
+                <span>
+                  Work
+                  <img src={downIcon} alt='workDown' />
+                </span>
               </a>
             </Work>
           </NavListWrap>
@@ -263,4 +272,12 @@ const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
