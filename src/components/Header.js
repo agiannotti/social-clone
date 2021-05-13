@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-import moon from '../images/moon.png';
+import moon from '../images/dark-moon.svg';
 import searchIcon from '../images/search-icon.svg';
 import navHome from '../images/nav-home.svg';
+import navJobs from '../images/nav-jobs.svg';
+import navMessaging from '../images/nav-messaging.svg';
+import navNetworks from '../images/nav-network.svg';
+import navNotifications from '../images/nav-notifications.svg';
 
 const Header = () => {
   return (
@@ -24,7 +28,32 @@ const Header = () => {
           <NavListWrap>
             <NavList>
               <a>
-                <img src={navHome} alt='' />
+                <img src={navHome} alt='navHome' />
+                <span>Home</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src={navJobs} alt='navJobs' />
+                <span>Meet Ups</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src={navMessaging} alt='navMessaging' />
+                <span>Messaging</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src={navNetworks} alt='navNetworks' />
+                <span>My Network</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src={navNotifications} alt='navNotifications' />
+                <span>Alerts</span>
               </a>
             </NavList>
           </NavListWrap>
@@ -35,7 +64,7 @@ const Header = () => {
 };
 
 const Container = styled.div`
-  background-color: #424242;
+  background-color: #eee;
   border-bottom: 1px solid rgba(0, 0, 0, 0.8);
   left: 0;
   padding: 0 24px;
@@ -110,7 +139,47 @@ const Nav = styled.nav`
   }
 `;
 
-const NavListWrap = styled.ul``;
-const NavList = styled.li``;
+const NavListWrap = styled.ul`
+  display: flex;
+  flex-wrap: nowrap;
+  list-style-type: none;
+`;
+
+const NavList = styled.li`
+  display: flex;
+  align-items: center;
+  a {
+    align-items: center;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 400;
+    justify-content: center;
+    line-height: 1.5;
+    min-height: 42px;
+    min-width: 80px;
+    position: relative;
+    text-decoration: none;
+    span {
+      color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      min-width: 70px;
+    }
+  }
+
+  &:hover,
+  &:active {
+    a {
+      span {
+        color: rgba(0, 0, 0, 0.9);
+      }
+    }
+  }
+`;
 
 export default Header;
