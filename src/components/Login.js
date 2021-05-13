@@ -2,11 +2,14 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { SignInApi } from '../actions/';
 import logo from '../images/google-logo.png';
+import { Redirect } from 'react-router';
 import moon from '../images/moon.png';
 
 const Login = (props) => {
   return (
     <Container>
+      {props.user && <Redirect to='/home' />}
+
       <Nav>
         <a href='/'>
           <img src={moon} style={{ height: 45 }} alt='mo0n' />
@@ -177,7 +180,7 @@ const Google = styled.button`
 `;
 
 const mapStateToProps = (state) => {
-  return {};
+  return { user: state.userState.user };
 };
 
 const mapDispatchToProps = (dispatch) => ({
