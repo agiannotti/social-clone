@@ -4,6 +4,7 @@ import photo from '../images/cam1.png';
 import widget from '../images/widget-icon.svg';
 import itemIcon from '../images/item-icon.svg';
 import plusIcon from '../images/plus-icon.svg';
+import { connect } from 'react-redux';
 
 const LeftSide = (props) => {
   return (
@@ -13,7 +14,9 @@ const LeftSide = (props) => {
           <CardBackground />
           <a>
             <Photo />
-            <Link>Welcome!</Link>
+            <Link>
+              Welcome{props.user ? ', ' + props.user.displayName : ''}!
+            </Link>
           </a>
           <a>
             <AddPhotoText>Add a photo</AddPhotoText>
@@ -193,5 +196,8 @@ const CommunityCard = styled(ArtCard)`
     }
   }
 `;
+const mapStateToProps = (state) => {
+  return { user: state.userState.user };
+};
 
-export default LeftSide;
+export default connect(mapStateToProps)(LeftSide);

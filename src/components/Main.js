@@ -10,6 +10,8 @@ import SentimentVerySatisfiedTwoToneIcon from '@material-ui/icons/SentimentVeryS
 import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
 import SendIcon from '@material-ui/icons/Send';
 import LaunchIcon from '@material-ui/icons/Launch';
+
+import PostModal from './PostModal';
 const Main = (props) => {
   return (
     <Container>
@@ -99,6 +101,7 @@ const Main = (props) => {
           </SocialActions>
         </Article>
       </div>
+      <PostModal />
     </Container>
   );
 };

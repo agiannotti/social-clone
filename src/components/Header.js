@@ -263,9 +263,12 @@ const User = styled(NavList)`
   }
   &:hover {
     ${SignOut} {
+      margin-top: -3px;
+      padding: 12px;
       align-items: center;
       display: flex;
       justify-content: center;
+      cursor: pointer;
     }
   }
 `;

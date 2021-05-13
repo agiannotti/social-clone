@@ -85,6 +85,7 @@ const SignIn = styled.a`
     color: black;
     opacity: 0.8;
     text-decoration: none;
+    cursor: pointer;
   }
 `;
 const Section = styled.section`
@@ -172,6 +173,7 @@ const Google = styled.button`
   &:hover {
     background-color: rgba(207, 207, 207, 0.99);
     color: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
   }
   img {
     height: 24px;

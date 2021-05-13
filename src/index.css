@@ -8,7 +8,7 @@ body,
 html {
   background-color: #424242;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 div,
@@ -36,4 +36,9 @@ ul {
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+}
+
+button,
+a:hover {
+  cursor: pointer;
 }
