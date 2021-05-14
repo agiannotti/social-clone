@@ -1,20 +1,26 @@
-import styled from 'styled-components';
-import VideoCallTwoToneIcon from '@material-ui/icons/VideoCallTwoTone';
 import AddAPhotoTwoToneIcon from '@material-ui/icons/AddAPhotoTwoTone';
 import AssignmentTwoToneIcon from '@material-ui/icons/AssignmentTwoTone';
-import EventAvailableTwoToneIcon from '@material-ui/icons/EventAvailableTwoTone';
-import user from '../images/user.svg';
-import sharedImg from '../images/background.jpg';
-import ThumbUpAltTwoTone from '@material-ui/icons/ThumbUpAlt';
-import SentimentVerySatisfiedTwoToneIcon from '@material-ui/icons/SentimentVerySatisfiedTwoTone';
 import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
-import SendIcon from '@material-ui/icons/Send';
+import EventAvailableTwoToneIcon from '@material-ui/icons/EventAvailableTwoTone';
 import LaunchIcon from '@material-ui/icons/Launch';
-import { useState } from 'react';
-
+import SendIcon from '@material-ui/icons/Send';
+import SentimentVerySatisfiedTwoToneIcon from '@material-ui/icons/SentimentVerySatisfiedTwoTone';
+import ThumbUpAltTwoTone from '@material-ui/icons/ThumbUpAlt';
+import VideoCallTwoToneIcon from '@material-ui/icons/VideoCallTwoTone';
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { getArticlesAPI } from '../actions';
+import sharedImg from '../images/background.jpg';
+import spinner from '../images/spinner.svg';
+import user from '../images/user.svg';
 import PostModal from './PostModal';
+import ReactPlayer from 'react-player';
 const Main = (props) => {
   const [showModal, setShowModal] = useState('close');
+  useEffect(() => {
+    props.getArticles();
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -35,95 +41,118 @@ const Main = (props) => {
   };
 
   return (
-    <Container>
-      <ShareBox>
-        Share
-        <div>
-          <img src={user} alt='' />
-          <button onClick={handleClick}>Create a post</button>
-        </div>
-        <div>
-          <button>
-            <a>
-              <AddAPhotoTwoToneIcon style={{ color: 'blue' }} />
-            </a>
-            <span>Photo</span>
-          </button>
-          <button>
-            <a>
-              <VideoCallTwoToneIcon style={{ color: 'green' }} />
-            </a>
-            <span>Video</span>
-          </button>
-          <button>
-            <a>
-              <AssignmentTwoToneIcon style={{ color: 'orange' }} />
-            </a>
-            <span>Article</span>
-          </button>
-          <button>
-            <a>
-              <EventAvailableTwoToneIcon style={{ color: 'red' }} />
-            </a>
-            <span>Event</span>
-          </button>
-        </div>
-      </ShareBox>
-      <div>
-        <Article>
-          <SharedActor>
-            <a>
-              <img src={user} alt='' />
-              <div>
-                <span>Title</span>
-                <span>Info</span>
-                <span>Date</span>
-              </div>
-            </a>
-            <button>...</button>
-          </SharedActor>
-          <Description>Desc</Description>
-          <SharedImg>
-            <a>
-              <img src={sharedImg} alt='' />
-            </a>
-          </SharedImg>
-          <SocialCounts>
-            <li>
+    <>
+      {props.articles.length === 0 ? (
+        <p>There are no articles</p>
+      ) : (
+        <Container>
+          <ShareBox>
+            <div>
+              {props.user && props.user.photoURL ? (
+                <img src={props.user.photoURL} alt='' />
+              ) : (
+                <img src={user} alt='' />
+              )}
+              <button onClick={handleClick}>Create a post</button>
+              disabled={props.loading ? true : false}
+            </div>
+            <div>
               <button>
-                <ThumbUpAltTwoTone style={{ color: '#424242' }} />
-                <SentimentVerySatisfiedTwoToneIcon
-                  style={{ color: '#424242' }}
-                />
-                <span>75</span>
+                <a>
+                  <AddAPhotoTwoToneIcon style={{ color: 'blue' }} />
+                </a>
+                <span>Photo</span>
               </button>
-            </li>
-            <li>
-              <a>2 comments</a>
-            </li>
-          </SocialCounts>
-          <SocialActions>
-            <button>
-              <ThumbUpAltTwoTone />
-              <span>Like</span>
-            </button>
-            <button>
-              <CommentTwoToneIcon />
-              <span>Comment</span>
-            </button>
-            <button>
-              <LaunchIcon />
-              <span>Share</span>
-            </button>
-            <button>
-              <SendIcon />
-              <span>Send</span>
-            </button>
-          </SocialActions>
-        </Article>
-      </div>
-      <PostModal showModal={showModal} handleClick={handleClick} />
-    </Container>
+              <button>
+                <a>
+                  <VideoCallTwoToneIcon style={{ color: 'green' }} />
+                </a>
+                <span>Video</span>
+              </button>
+              <button>
+                <a>
+                  <AssignmentTwoToneIcon style={{ color: 'orange' }} />
+                </a>
+                <span>Article</span>
+              </button>
+              <button>
+                <a>
+                  <EventAvailableTwoToneIcon style={{ color: 'red' }} />
+                </a>
+                <span>Event</span>
+              </button>
+            </div>
+          </ShareBox>
+          <Content>
+            {props.loading && <img src={spinner} alt='' />}
+
+            {props.articles.length > 0 &&
+              props.articles.map((article, key) => (
+                <Article key={key}>
+                  <SharedActor>
+                    <a>
+                      <img src={article.actor.image} alt='' />
+                      <div>
+                        <span>{article.actor.title}</span>
+                        <span>{article.actor.description}</span>
+                        <span>
+                          {article.actor.date.toDate().toLocaleDateString()}
+                        </span>
+                      </div>
+                    </a>
+                    <button>...</button>
+                  </SharedActor>
+                  <Description>{article.description}</Description>
+                  <SharedImg>
+                    <a>
+                      {!article.sharedImg && article.video ? (
+                        <ReactPlayer width='100%' url={article.video} />
+                      ) : (
+                        article.sharedImg && (
+                          <img src={article.sharedImg} alt='' />
+                        )
+                      )}
+                    </a>
+                  </SharedImg>
+                  <SocialCounts>
+                    <li>
+                      <button>
+                        <ThumbUpAltTwoTone style={{ color: '#424242' }} />
+                        <SentimentVerySatisfiedTwoToneIcon
+                          style={{ color: '#424242' }}
+                        />
+                        <span>75</span>
+                      </button>
+                    </li>
+                    <li>
+                      <a>{article.comments}</a>
+                    </li>
+                  </SocialCounts>
+                  <SocialActions>
+                    <button>
+                      <ThumbUpAltTwoTone />
+                      <span>Like</span>
+                    </button>
+                    <button>
+                      <CommentTwoToneIcon />
+                      <span>Comment</span>
+                    </button>
+                    <button>
+                      <LaunchIcon />
+                      <span>Share</span>
+                    </button>
+                    <button>
+                      <SendIcon />
+                      <span>Send</span>
+                    </button>
+                  </SocialActions>
+                </Article>
+              ))}
+          </Content>
+          <PostModal showModal={showModal} handleClick={handleClick} />
+        </Container>
+      )}
+    </>
   );
 };
 
@@ -322,4 +351,23 @@ const SocialActions = styled.div`
     }
   }
 `;
-export default Main;
+
+const Content = styled.div`
+  text-align: center;
+  & > img {
+    width: 30px;
+  }
+`;
+
+const mapStateToProps = (state) => {
+  return {
+    loading: state.articleState.loading,
+    user: state.userState.user,
+    articles: state.articleState.articles,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getArticles: () => dispatch(getArticlesAPI()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

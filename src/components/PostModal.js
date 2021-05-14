@@ -6,7 +6,7 @@ import VideoCallTwoToneIcon from '@material-ui/icons/VideoCallTwoTone';
 import AddCommentTwoToneIcon from '@material-ui/icons/AddCommentTwoTone';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
-import firebase from '../firebase';
+import firebase from 'firebase';
 import { postArticleAPI } from '../actions';
 
 const PostModal = (props) => {
@@ -49,7 +49,7 @@ const PostModal = (props) => {
     video: videoLink,
     user: props.user,
     description: editorText,
-    timestamp: firebase.firestore.timestamp.now(),
+    timestamp: firebase.firestore.Timestamp.now(),
   };
 
   const reset = (e) => {
