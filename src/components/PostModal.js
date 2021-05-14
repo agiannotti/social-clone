@@ -1,46 +1,156 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-import user from '../images/user.svg';
 import InsertPhotoTwoToneIcon from '@material-ui/icons/InsertPhotoTwoTone';
 import VideoCallTwoToneIcon from '@material-ui/icons/VideoCallTwoTone';
 import AddCommentTwoToneIcon from '@material-ui/icons/AddCommentTwoTone';
+import ReactPlayer from 'react-player';
+import { connect } from 'react-redux';
+import firebase from '../firebase';
+import { postArticleAPI } from '../actions';
 
-const PostModal = () => {
+const PostModal = (props) => {
+  const [editorText, setEditorText] = useState('');
+  const [shareImage, setShareImage] = useState('');
+  const [videoLink, setVideoLink] = useState('');
+  const [assetArea, setAssetArea] = useState('');
+
+  const handleChange = (e) => {
+    const image = e.target.files[0];
+
+    if (image === '' || image === undefined) {
+      alert(`not an image, the file is a ${typeof image}`);
+      return;
+    }
+    setShareImage(image);
+  };
+
+  const switchAssetArea = (area) => {
+    setShareImage('');
+    setVideoLink('');
+    setAssetArea(area);
+  };
+
+  const postArticle = (e) => {
+    console.log('asdasdasd');
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      console.log('asdasdasd');
+
+      return;
+    }
+
+    props.postArticle(payload);
+    reset(e);
+  };
+
+  const payload = {
+    image: shareImage,
+    video: videoLink,
+    user: props.user,
+    description: editorText,
+    timestamp: firebase.firestore.timestamp.now(),
+  };
+
+  const reset = (e) => {
+    setEditorText('');
+    setShareImage('');
+    setVideoLink('');
+    setAssetArea('');
+    props.handleClick(e);
+  };
   return (
-    <Container>
-      <Content>
-        <Header>
-          <h2>Create a post</h2>
-          <button>
-            <CloseIcon />
-          </button>
-        </Header>
-        <ShareContent>
-          <UserInfo>
-            <img src={user} alt='userLogo' />
-            <span>Name</span>
-          </UserInfo>
-        </ShareContent>
-        <ShareCreation>
-          <AttachAssets>
-            <AssetButton>
-              <InsertPhotoTwoToneIcon />
-            </AssetButton>
-            <AssetButton>
-              <VideoCallTwoToneIcon />
-            </AssetButton>
-          </AttachAssets>
-          <ShareComment>
-            <AssetButton>
-              <AddCommentTwoToneIcon />
-              hmmm
-            </AssetButton>
-          </ShareComment>
+    <>
+      {props.showModal === 'open' && (
+        <Container>
+          <Content>
+            <Header>
+              <h2>Create a post</h2>
+              <button
+                onClick={(event) => {
+                  reset(event);
+                }}
+              >
+                <CloseIcon />
+              </button>
+            </Header>
+            <ShareContent>
+              <UserInfo>
+                {props.user.photoURL ? (
+                  <img src={props.user.photoURL} alt='' />
+                ) : (
+                  <img src='../images/user.svg' alt='' />
+                )}
+                <span>{props.user.displayName}</span>
+              </UserInfo>
+              <Editor>
+                <textarea
+                  value={editorText}
+                  onChange={(e) => setEditorText(e.target.value)}
+                  placeholder='What do you want to talk about?'
+                  autoFocus={true}
+                />
+                {assetArea === 'image' ? (
+                  <UploadImage>
+                    <input
+                      type='file'
+                      accept='image/gif, image/jpeg, image/png'
+                      name='image'
+                      id='file'
+                      style={{ display: 'none' }}
+                      onChange={handleChange}
+                    />
+                    <p>
+                      <label htmlFor='file'>Select an image to share</label>{' '}
+                    </p>
+                    {shareImage && (
+                      <img src={URL.createObjectURL(shareImage)} alt='' />
+                    )}
+                  </UploadImage>
+                ) : (
+                  assetArea === 'media' && (
+                    <>
+                      <input
+                        type='text'
+                        placeholder='Please input a video link'
+                        value={videoLink}
+                        onChange={(e) => setVideoLink(e.target.value)}
+                      />
+                      {videoLink && (
+                        <ReactPlayer width='100%' url={videoLink} />
+                      )}
+                    </>
+                  )
+                )}
+              </Editor>
+            </ShareContent>
+            <ShareCreation>
+              <AttachAssets>
+                <AssetButton onClick={() => switchAssetArea('image')}>
+                  <InsertPhotoTwoToneIcon />
+                </AssetButton>
+                <AssetButton onClick={() => switchAssetArea('media')}>
+                  <VideoCallTwoToneIcon />
+                </AssetButton>
+              </AttachAssets>
+              <ShareComment>
+                <AssetButton>
+                  <AddCommentTwoToneIcon />
+                  Comment
+                </AssetButton>
+              </ShareComment>
 
-          <PostButton>Post</PostButton>
-        </ShareCreation>
-      </Content>
-    </Container>
+              <PostButton
+                disabled={!editorText ? true : false}
+                onClick={(event) => postArticle(event)}
+              >
+                Post
+              </PostButton>
+            </ShareCreation>
+          </Content>
+        </Container>
+      )}
+    </>
   );
 };
 
@@ -53,6 +163,7 @@ const Container = styled.div`
   z-index: 1000;
   color: black;
   background-color: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s;
 `;
 
 const Content = styled.div`
@@ -61,7 +172,7 @@ const Content = styled.div`
   background-color: #fff;
   max-height: 90%;
   overflow: initial;
-  border-radius: 15px;
+  border-radius: 15px !important;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -89,6 +200,10 @@ const Header = styled.div`
     width: 40px;
     min-width: auto;
     color: rgba(0, 0, 0, 0.7);
+    svg,
+    img {
+      pointer-events: none;
+    }
   }
 `;
 
@@ -156,9 +271,38 @@ const PostButton = styled.button`
   border-radius: 24px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 0 16px;
+  background: ${(props) =>
+    props.disabled ? 'rgba(0, 0, 0, 0.15)' : '#f5d654'};
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: ${(props) =>
+      props.disabled ? 'rgba(0, 0, 0, 0.35)' : '#f5d654'};
   }
 `;
 
-export default PostModal;
+const Editor = styled.div`
+  padding: 12px 24px;
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: none;
+  }
+  input {
+    width: 100%;
+    height: 35px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+`;
+const UploadImage = styled.div`
+  text-align: center;
+  img {
+    width: 100%;
+  }
+`;
+const mapStateToProps = (user) => {
+  return { user: user.userState.user };
+};
+const mapDispatchToProps = (dispatch) => ({
+  postArticle: (payload) => dispatch(postArticleAPI(payload)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(PostModal);

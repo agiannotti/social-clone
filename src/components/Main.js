@@ -10,16 +10,37 @@ import SentimentVerySatisfiedTwoToneIcon from '@material-ui/icons/SentimentVeryS
 import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
 import SendIcon from '@material-ui/icons/Send';
 import LaunchIcon from '@material-ui/icons/Launch';
+import { useState } from 'react';
 
 import PostModal from './PostModal';
 const Main = (props) => {
+  const [showModal, setShowModal] = useState('close');
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    switch (showModal) {
+      case 'open':
+        setShowModal('close');
+        break;
+      case 'close':
+        setShowModal('open');
+        break;
+      default:
+        setShowModal('close');
+    }
+  };
+
   return (
     <Container>
       <ShareBox>
         Share
         <div>
           <img src={user} alt='' />
-          <button>Create a post</button>
+          <button onClick={handleClick}>Create a post</button>
         </div>
         <div>
           <button>
@@ -101,7 +122,7 @@ const Main = (props) => {
           </SocialActions>
         </Article>
       </div>
-      <PostModal />
+      <PostModal showModal={showModal} handleClick={handleClick} />
     </Container>
   );
 };
