@@ -156,9 +156,7 @@ const Google = styled.button`
   justify-content: center;
   background-color: #fff;
   align-items: center;
-  /* temp  */
-  margin-top: 450px;
-  /* temp */
+
   height: 56px;
   width: 100%;
   border: 2px solid gray;
