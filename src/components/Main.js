@@ -53,8 +53,12 @@ const Main = (props) => {
               ) : (
                 <img src={user} alt='' />
               )}
-              <button onClick={handleClick}>Create a post</button>
-              disabled={props.loading ? true : false}
+              <button
+                onClick={handleClick}
+                disabled={props.loading ? true : false}
+              >
+                Create a post
+              </button>
             </div>
             <div>
               <button>
@@ -327,6 +331,8 @@ const SocialCounts = styled.ul`
     font-size: 12px;
     button {
       display: flex;
+      border: none;
+      background-color: white;
     }
   }
 `;
@@ -343,6 +349,8 @@ const SocialActions = styled.div`
     align-items: center;
     padding: 8px;
     color: #424242;
+    border: none;
+    background-color: white;
 
     @media (min-width: 768px) {
       span {
